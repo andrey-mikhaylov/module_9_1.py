@@ -1,5 +1,34 @@
+from typing import Any
+
+
+def apply_all_func(int_list: list[int | float], *functions) -> dict[str, Any]:
+    """
+    Эта функция должна вызвать каждую функцию к переданному списку int_list
+    :param int_list: список из чисел (int, float)
+    :param functions: неограниченное кол-во функций (которые применимы к спискам, состоящим из чисел)
+    :return: словарь, где ключом будет название вызванной функции, а значением - её результат работы со списком int_list.
+
+    """
+    # В функции apply_all_func создайте пустой словарь results.
+    results = {}
+
+    # Переберите все функции из *functions.
+    for fn in functions:
+        # При переборе функций записывайте в словарь results результат работы этой функции под ключом её названия.
+        results.update({fn.__name__: fn(int_list)})
+
+    # Верните словарь results.
+    return results
+
+
 def test():
-    pass
+    print(apply_all_func([6, 20, 15, 9], max, min))
+    print(apply_all_func([6, 20, 15, 9], len, sum, sorted))
+    """
+    Вывод на консоль:
+    {'max': 20, 'min': 6}
+    {'len': 4, 'sum': 50, 'sorted': [6, 9, 15, 20]}
+    """
 
 
 if __name__ == '__main__':
